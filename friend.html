@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Night Owl Study Buddy</title>
+  <meta name="description" content="A special page dedicated to my friend who studies at night. Stay motivated and keep rocking those late-night study sessions!" />
+  <meta name="keywords" content="night study, night owl, studying late, motivation, student life" />
+  <meta name="author" content="Mohammed Jubair" />
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+
+  <style>
+    /* Base styles */
+    * {
+      margin: 0; padding: 0; box-sizing: border-box;
+    }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #121212;
+      color: #e0e0e0;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      text-align: center;
+      padding: 2rem;
+      transition: background 0.5s ease, color 0.5s ease;
+      overflow-x: hidden;
+    }
+    /* Light mode styles */
+    body.light-mode {
+      background: #f5f5f5;
+      color: #222;
+    }
+    header {
+      margin-bottom: 2rem;
+      opacity: 0;
+      animation: fadeIn 1s forwards;
+    }
+    header h1 {
+      font-size: 3rem;
+      color: #ffcc00;
+      margin-bottom: 0.5rem;
+      transition: color 0.5s ease;
+    }
+    body.light-mode header h1 {
+      color: #b8860b;
+    }
+    header p {
+      font-size: 1.25rem;
+      color: #bbb;
+      transition: color 0.5s ease;
+    }
+    body.light-mode header p {
+      color: #555;
+    }
+    header img {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      margin-top: 1rem;
+      box-shadow: 0 0 10px #ffcc00aa;
+      object-fit: cover;
+      transition: box-shadow 0.5s ease;
+    }
+    body.light-mode header img {
+      box-shadow: 0 0 10px #b8860baa;
+    }
+    main {
+      flex-grow: 1;
+      opacity: 0;
+      animation: fadeIn 1.5s forwards;
+      animation-delay: 0.5s;
+    }
+    section {
+      max-width: 600px;
+      margin: 0 auto 2rem;
+      background: #1e1e1e;
+      padding: 1.5rem;
+      border-radius: 12px;
+      box-shadow: 0 0 15px #ffcc00aa;
+      transition: background 0.5s ease, box-shadow 0.5s ease;
+      opacity: 0;
+      animation: fadeIn 2s forwards;
+      animation-delay: 1s;
+    }
+    body.light-mode section {
+      background: #fff8dc;
+      box-shadow: 0 0 15px #b8860baa;
+    }
+    h2 {
+      color: #ffcc00;
+      margin-bottom: 1rem;
+      transition: color 0.5s ease;
+    }
+    body.light-mode h2 {
+      color: #b8860b;
+    }
+    p, ul {
+      font-size: 1.1rem;
+      line-height: 1.6;
+    }
+    ul {
+      text-align: left;
+      max-width: 400px;
+      margin: 0 auto;
+    }
+    footer {
+      margin-top: auto;
+      font-size: 0.9rem;
+      color: #555;
+      transition: color 0.5s ease;
+    }
+    body.light-mode footer {
+      color: #888;
+    }
+    /* Buttons */
+    .tease-btn, .toggle-btn {
+      background: #ffcc00;
+      color: #121212;
+      font-weight: 600;
+      border: none;
+      border-radius: 30px;
+      padding: 0.8rem 2rem;
+      font-size: 1.1rem;
+      cursor: pointer;
+      box-shadow: 0 0 10px #ffcc00aa;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      margin-top: 1rem;
+      margin-right: 1rem;
+    }
+    .tease-btn:hover, .toggle-btn:hover {
+      transform: scale(1.15) rotate(5deg);
+      box-shadow: 0 0 25px #ffcc00ee;
+    }
+    /* Container for buttons */
+    .button-container {
+      max-width: 600px;
+      margin: 0 auto 2rem;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      opacity: 0;
+      animation: fadeIn 2.5s forwards;
+      animation-delay: 1.5s;
+    }
+    /* Quote text */
+    #quote {
+      font-style: italic;
+      margin-top: 1rem;
+      color: #ffd633;
+      min-height: 50px;
+      transition: color 0.5s ease;
+      opacity: 0;
+      animation: fadeIn 3s forwards;
+      animation-delay: 2s;
+    }
+    body.light-mode #quote {
+      color: #b8860b;
+    }
+    /* Timer display */
+    #timer-display {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-top: 1rem;
+      color: #ffcc00;
+      text-shadow: 0 0 8px #ffcc00aa;
+      user-select: none;
+      opacity: 0;
+      animation: fadeIn 3.5s forwards;
+      animation-delay: 2.5s;
+      transition: color 0.5s ease;
+    }
+    body.light-mode #timer-display {
+      color: #b8860b;
+      text-shadow: 0 0 8px #b8860baa;
+    }
+    /* Keyframes */
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Night Owl Study Buddy 🦉</h1>
+  <p>Dedicated to my friend who studies at night — keep crushing those late hours!</p>
+  <img src="friend.jpg" alt="Friend studying at night" />
+</header>
+
+<div class="button-container">
+  <button class="tease-btn" id="motivate-btn">Click for Motivation</button>
+  <button class="toggle-btn" id="mode-toggle-btn">Toggle Light/Dark Mode</button>
+  <button class="toggle-btn" id="timer-start-btn">Start Study Timer</button>
+  <button class="toggle-btn" id="timer-reset-btn" disabled>Reset Timer</button>
+</div>
+
+<div id="timer-display">25:00</div>
+
+<main>
+  <section>
+    <h2>Motivational Quote</h2>
+    <div id="quote">Click the “Click for Motivation” button to get inspired!</div>
+  </section>
+
+  <section>
+    <h2>Why Study at Night?</h2>
+    <p>Some of the best ideas and focus happen when the world is quiet and the stars are out. Nighttime study sessions are a special kind of magic — even if it means fighting off the sleepiness!</p>
+  </section>
+
+  <section>
+    <h2>Cheeky Reminder</h2>
+    <p>Hey friend, you play all day and spend too much time on your phone, but now it’s time to hit those books! Don’t worry, your late-night hustle will pay off.</p>
+  </section>
+
+  <section>
+    <h2>Tips for Night Studying</h2>
+    <ul>
+      <li>Keep your study space bright and clutter-free.</li>
+      <li>Take short breaks every 45 minutes.</li>
+      <li>Stay hydrated with water or tea.</li>
+      <li>Set small goals and reward yourself.</li>
+      <li>Try to get at least some quality sleep!</li>
+    </ul>
+  </section>
+</main>
+
+<footer>
+  <p>Made with ❤️ by Mohammed Jubair | Keep grinding, day or night!</p>
+</footer>
+
+<script>
+  // Motivational quotes array
+  const quotes = [
+    "“Don’t watch the clock; do what it does. Keep going.” – Sam Levenson",
+    "“Success is the sum of small efforts repeated day in and day out.” – Robert Collier",
+    "“The future belongs to those who believe in the beauty of their dreams.” – Eleanor Roosevelt",
+    "“Push yourself, because no one else is going to do it for you.”",
+    "“It always seems impossible until it’s done.” – Nelson Mandela",
+    "“Focus on your goal. Don’t look in any direction but ahead.”",
+    "“Dream big and dare to fail.” – Norman Vaughan",
+    "“Your limitation—it’s only your imagination.”"
+  ];
+
+  // Elements
+  const motivateBtn = document.getElementById('motivate-btn');
+  const quoteDiv = document.getElementById('quote');
+  const modeToggleBtn = document.getElementById('mode-toggle-btn');
+  const timerStartBtn = document.getElementById('timer-start-btn');
+  const timerResetBtn = document.getElementById('timer-reset-btn');
+  const timerDisplay = document.getElementById('timer-display');
+
+  // Show random quote on button click
+  motivateBtn.addEventListener('click', () => {
+    const randomIndex = Math.floor(Math.random() * quotes.length);
+    quoteDiv.textContent = quotes[randomIndex];
+  });
+
+  // Toggle light/dark mode
+  modeToggleBtn.addEventListener('click', () => {
+    document.body.classList.toggle('light-mode');
+  });
+
+  // Timer variables
+  let timerDuration = 25 * 60; // 25 minutes in seconds
+  let timer = null;
+  let timeLeft = timerDuration;
+  let onBreak = false;
+
+  // Format seconds to MM:SS
+  function formatTime(seconds) {
+    const m = Math.floor(seconds / 60).toString().padStart(2, '0');
+    const s = (seconds % 60).toString().padStart(2, '0');
+    return `${m}:${s}`;
+  }
+
+  // Update timer display
+  function updateDisplay() {
+    timerDisplay.textContent = formatTime(timeLeft);
+  }
+
+  // Timer tick
+  function tick() {
+    if (timeLeft > 0) {
+      timeLeft--;
+      updateDisplay();
+    } else {
+      clearInterval(timer);
+      timer = null;
+      if (!onBreak) {
+        alert("Time's up! Take a 5-minute break.");
+        timeLeft = 5 * 60; // 5 minutes break
+        onBreak = true;
+        updateDisplay();
+        timerStartBtn.textContent = "Start Break Timer";
+        timerResetBtn.disabled = false;
+      } else {
+        alert("Break over! Ready for another 25 minutes?");
+        timeLeft = timerDuration;
+        onBreak = false;
+        updateDisplay();
+        timerStartBtn.textContent = "Start Study Timer";
+        timerResetBtn.disabled = false;
+      }
+    }
+  }
+
+  // Start timer button click
+  timerStartBtn.addEventListener('click', () => {
+    if (!timer) {
+      timer = setInterval(tick, 1000);
+      timerStartBtn.disabled = true;
+      timerResetBtn.disabled = false;
+    }
+  });
+
+  // Reset timer button click
+  timerResetBtn.addEventListener('click', () => {
+    clearInterval(timer);
+    timer = null;
+    timeLeft = onBreak ? 5 * 60 : timerDuration;
+    updateDisplay();
+    timerStartBtn.disabled = false;
+    timerResetBtn.disabled = true;
+  });
+
+  // Initialize display
+  updateDisplay();
+</script>
+
+</body>
+</html>
